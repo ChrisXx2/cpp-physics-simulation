@@ -18,9 +18,9 @@ int main() {
     Particle ball(0.0, 10.0, -9.81);
     double dt = 0.1;
 
-    for (int step = 0; step < 20; step++) {
+    for (int i = 0; i < 20; i++) {
         update(ball, dt);
-        std::cout << "t = " << step * dt
+        std::cout << "t = " << i * dt
                   << " | position = " << ball.position
                   << " | velocity = " << ball.velocity
                   << std::endl;
