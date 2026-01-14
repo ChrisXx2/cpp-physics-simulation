@@ -16,13 +16,18 @@ void update(Particle& particle, double dt) {
 
 int main() {
     Particle ball(0.0, 10.0, -9.81);
+    Particle lemon(0.0, 5.0, -9.81);
     double dt = 0.1;
 
     for (int i = 0; i < 20; i++) {
         update(ball, dt);
+        update(lemon, dt);
         std::cout << "t = " << i * dt
-                  << " | position = " << ball.position
-                  << " | velocity = " << ball.velocity
+                  << " | ball's position = " << ball.position
+                  << " | ball's velocity = " << ball.velocity
+                  << " | "
+                  << " | lemon's position = " << lemon.position
+                  << " | lemon's velocity = " << lemon.velocity
                   << std::endl;
     }
 
