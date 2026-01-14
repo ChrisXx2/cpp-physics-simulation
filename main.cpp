@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 struct Particle {
     double position;
@@ -9,26 +10,29 @@ struct Particle {
         : position(pos), velocity(vel), acceleration(acc) {}
 };
 
-void update(Particle& particle, double dt) {
-    particle.velocity += particle.acceleration * dt;
-    particle.position += particle.velocity * dt;
+void update(Particle& p, double dt) {
+    p.velocity += p.acceleration * dt;
+    p.position += p.velocity * dt;
 }
 
 int main() {
-    Particle ball(0.0, 10.0, -9.81);
-    Particle lemon(0.0, 5.0, -9.81);
+    std::vector<Particle> particles;
+
+    particles.emplace_back(0.0, 10.0, -9.81);
+    particles.emplace_back(5.0, 5.0, -9.81);
+    particles.emplace_back(-3.0, 15.0, -9.81);
+
     double dt = 0.1;
 
-    for (int i = 0; i < 20; i++) {
-        update(ball, dt);
-        update(lemon, dt);
-        std::cout << "t = " << i * dt
-                  << " | ball's position = " << ball.position
-                  << " | ball's velocity = " << ball.velocity
-                  << " | "
-                  << " | lemon's position = " << lemon.position
-                  << " | lemon's velocity = " << lemon.velocity
-                  << std::endl;
+    for (int step = 0; step < 20; step++) {
+        std::cout << "t = " << step * dt << std::endl;
+
+        for (Particle& p : particles) {
+            update(p, dt);
+            std::cout << "  position = " << p.position
+                      << " velocity = " << p.velocity
+                      << std::endl;
+        }
     }
 
     return 0;
