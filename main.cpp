@@ -16,10 +16,9 @@ int main() {
 
         for (Particle& p : particles) {
             update(p, dt);
-            double kE = kineticEnergy(p);
             std::cout << "  position = " << p.position << " || "
                       << " velocity = " << p.velocity << " || "
-                      << " kinetic energy = " << kE << " || "
+                      << " kinetic energy = " << p.kineticEnergy(p) << " || "
                       << std::endl;
         }
     }

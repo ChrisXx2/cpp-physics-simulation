@@ -9,6 +9,6 @@ void update(Particle& p, double dt) {
     p.position += p.velocity * dt;
 }
 
-double kineticEnergy(const Particle& p) {
+double Particle::kineticEnergy(Particle& p) const {
     return 0.5 * p.mass * pow(p.velocity, 2);
 }

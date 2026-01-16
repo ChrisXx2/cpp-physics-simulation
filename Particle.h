@@ -8,9 +8,11 @@ struct Particle {
     double mass;
 
     Particle(double pos, double vel, double acc, double m);
+
+    double kineticEnergy(Particle& p) const;
 };
 
 void update(Particle& p, double dt);
-double kineticEnergy(Particle& p);
+
 
 #endif
