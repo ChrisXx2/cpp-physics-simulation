@@ -5,10 +5,12 @@ struct Particle {
     double position;
     double velocity;
     double acceleration;
+    double mass;
 
-    Particle(double pos, double vel, double acc);
+    Particle(double pos, double vel, double acc, double m);
 };
 
 void update(Particle& p, double dt);
+double kineticEnergy(Particle& p);
 
 #endif
