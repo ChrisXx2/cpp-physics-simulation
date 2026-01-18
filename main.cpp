@@ -23,9 +23,9 @@ int main() {
     int defaultPos = 0;
     int defaultVel = 0;
 
-    for (Particle& p : particles) {
-
-        int i = &p - &particles[0];
+    for (size_t i = 0; i < particles.size(); i++) {
+    
+        Particle& p = particles[i];
 
 
 
@@ -54,12 +54,13 @@ int main() {
 
     for (int i = 0; i < 20; i++) {
         std::cout << "t = " << i * dt << std::endl;
-        for (Particle& p : particles) {
-            p.update(dt);
+        
+        for (size_t i = 0; i < particles.size(); i++) {
+        Particle& p = particles[i];
             std::cout << "Particle " << (&p - &particles[0]) << ": " <<std::endl
                       << " position = " << p.getPosition() << " || "
                       << " velocity = " << p.getVelocity() << " || "
-                      << " kinetic energy = " << p.getKineticEnergy(p) << " || "
+                      << " kinetic energy = " << p.getKineticEnergy() << " || "
                       << std::endl;
         }
         

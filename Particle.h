@@ -16,7 +16,7 @@ public:
 
     void update(double dt);
 
-    double getKineticEnergy(Particle& p) const;
+    double getKineticEnergy() const;
     double getPosition() const;
     void setPosition(double pos);
     double getVelocity() const;

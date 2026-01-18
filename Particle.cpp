@@ -9,8 +9,8 @@ void Particle::update(double dt) {
     position += velocity * dt;
 }
 
-double Particle::getKineticEnergy(Particle& p) const {
-    return 0.5 * p.mass * pow(p.velocity, 2);
+double Particle::getKineticEnergy() const {
+    return 0.5 * mass * pow(velocity, 2);
 }
 
 double Particle::getPosition() const {
