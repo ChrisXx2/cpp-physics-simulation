@@ -4,11 +4,27 @@
 Particle::Particle(double pos, double vel, double acc, double m)
     : position(pos), velocity(vel), acceleration(acc), mass(m) {}
 
-void update(Particle& p, double dt) {
-    p.velocity += p.acceleration * dt;
-    p.position += p.velocity * dt;
+void Particle::update(double dt) {
+    velocity += acceleration * dt;
+    position += velocity * dt;
 }
 
-double Particle::kineticEnergy(Particle& p) const {
+double Particle::getKineticEnergy(Particle& p) const {
     return 0.5 * p.mass * pow(p.velocity, 2);
+}
+
+double Particle::getPosition() const {
+    return position;
+}
+
+double Particle::getVelocity() const {
+    return velocity;
+}
+
+void Particle::setPosition(double pos) {
+    position = pos;
+}
+
+void Particle::setVelocity(double vel) {
+    velocity = vel;
 }
