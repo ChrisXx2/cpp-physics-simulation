@@ -36,7 +36,7 @@ int main() {
         }
 
         if (defaultPos == 0) {
-            std::cout << "Enter initial position for particle " << i << ": ";
+            std::cout << "Enter initial position for particle " << i + 1 << ": ";
             std::cin >> x;
             p.setPosition(x);
             std::cout << "Do you want to make it the default position? (1 for yes / 0 for no): ";
@@ -44,7 +44,7 @@ int main() {
         }
 
         if (defaultVel == 0) {
-            std::cout << "Enter initial velocity for particle " << i << ": ";
+            std::cout << "Enter initial velocity for particle " << i + 1 << ": ";
             std::cin >> v;
             p.setVelocity(v);
             std::cout << "Do you want to make it the default velocity? (1 for yes / 0 for no): ";
@@ -62,6 +62,7 @@ int main() {
                       << " velocity = " << p.getVelocity() << " || "
                       << " kinetic energy = " << p.getKineticEnergy() << " || "
                       << std::endl;
+            p.update(dt);
         }
         
     }
