@@ -15,6 +15,7 @@ public:
     Particle(double pos, double vel, double acc, double m);
 
     void update(double dt);
+    bool isValid(double value) const;
 
     double getKineticEnergy() const;
     double getPosition() const;

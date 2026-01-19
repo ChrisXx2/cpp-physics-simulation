@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include "Particle.h"
+#include <stdexcept>
 
 int main() {
     std::vector<Particle> particles;
