@@ -1,0 +1,75 @@
+🟦 Week 3 — Daily Checklist
+✅ Week 3 — Day 1
+From acceleration to forces
+
+☐ Remove acceleration from Particle
+☐ Add netForce to Particle
+☐ Add applyForce(double)
+☐ Add clearForces()
+☐ Compute acceleration inside update() using F = ma
+☐ Update main.cpp to apply gravity as a force
+☐ Verify motion matches previous gravity-only behavior
+☐ Commit / save stable version
+
+✅ Week 3 — Day 2
+Multiple forces & force composition
+
+☐ Apply **more than one force per particle
+☐ Add linear drag force
+☐ Verify drag reduces velocity over time
+☐ Ensure forces reset each timestep
+☐ Confirm order of force application doesn’t matter
+☐ Add comments explaining each force
+☐ Print net force once for debugging
+☐ Save clean working version
+
+✅ Week 3 — Day 3
+Separating force logic from Particle
+
+☐ Create ForceGenerator base class
+☐ Create GravityForce class
+☐ Create DragForce class
+☐ Move gravity logic out of main.cpp
+☐ Apply forces via generator objects
+☐ Ensure Particle has no physics constants
+☐ Test with gravity-only and drag-only cases
+☐ Clean up includes & headers
+
+✅ Week 3 — Day 4
+World / Simulation control
+
+☐ Create World or Simulation class
+☐ Move particle update loop into World
+☐ Store particles inside World
+☐ Store force generators inside World
+☐ Implement step(dt) function
+☐ Replace physics logic in main.cpp
+☐ Confirm output matches earlier versions
+☐ Add simulation time tracking
+
+✅ Week 3 — Day 5
+Stability, review, and polish
+
+☐ Review class responsibilities
+☐ Ensure invariants still hold
+☐ Remove unused variables
+☐ Improve naming consistency
+☐ Add brief comments where intent isn’t obvious
+☐ Test edge cases (zero velocity, large dt)
+☐ Decide what moves to Week 4
+☐ Final commit / snapshot
+
+🧠 End-of-week sanity check
+
+You should be able to answer yes to all of these:
+
+☐ Can I add a new force without modifying Particle?
+☐ Is physics logic outside main.cpp?
+☐ Do particles accumulate forces cleanly each step?
+☐ Is the code easier to extend than last week?
+
+If yes → you’re on track.
+
+One sentence to remember
+
+Week 3 is about structure, not speed.

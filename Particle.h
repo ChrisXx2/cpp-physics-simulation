@@ -4,24 +4,38 @@
 class Particle {
 private:
 
-    double position;
-    double velocity;
-    double acceleration;
+    double positionX;
+    double positionY;
+
+    double velocityX;
+    double velocityY;
+
+    double ForceX;
+    double ForceY;
+
     double mass;
+    double cross_sectional_Area;
 
 public:
 
 
-    Particle(double pos, double vel, double acc, double m);
+    Particle(double posX, double posY, double velX, double velY, double fX, double fY, double m, double CArea);
 
-    void update(double dt);
+    void update(double dt, double g);
     bool isValid(double value) const;
 
     double getKineticEnergy() const;
-    double getPosition() const;
-    void setPosition(double pos);
-    double getVelocity() const;
-    void setVelocity(double vel);
+    void applyForceX(double f);
+    void applyForceY(double f);
+    void clearForceX();
+    void clearForceY();
+
+    double getPositionX() const;
+    double getPositionY() const;
+    void setPosition(double posX, double posY);
+    double getVelocityX() const;
+    double getVelocityY() const;
+    void setVelocity(double velX, double velY);
     
 };
 
