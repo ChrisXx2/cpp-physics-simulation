@@ -88,6 +88,6 @@ int main() {
         }
         
     }
-
+    std::cin >> n;
     return 0;
 }
