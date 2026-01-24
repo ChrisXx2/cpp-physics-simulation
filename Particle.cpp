@@ -5,19 +5,40 @@
 Particle::Particle(
     double posX, 
     double posY, 
-    double velX, 
-    double velY, 
-    double fX, 
-    double fY, 
+    double velX,
+    double terminalVelX,
+    double velY,
+    double terminalVelY,
     double m, 
     double CArea
-) : positionX(posX), positionY(posY), velocityX(velX), velocityY(velY), ForceX(fX), ForceY(fY), mass(m), cross_sectional_Area(CArea) {}
+) : positionX(posX), positionY(posY), velocityX(velX), terminalVelocityX(terminalVelX), 
+    velocityY(velY), terminalVelocityY(terminalVelY), ForceX(0.0), ForceY(0.0), 
+    mass(m), cross_sectional_Area(CArea) {
+    
+    if (mass <= 0) {
+        throw std::invalid_argument("Mass must be positive");
+    }
+    if (CArea <= 0) {
+        throw std::invalid_argument("Cross-sectional area must be positive");
+    }
+}
 
-void Particle::update(double dt, double g) {
-    double accelerationX = ForceX / mass;
-    double accelerationY = ForceY / mass;
-    velocityX += accelerationX * dt;
-    velocityY += (accelerationY + g) * dt;
+void Particle::initialize(double dt, double g) {
+    velocityX += (ForceX / mass) * dt;
+    velocityY += (g + (ForceY / mass)) * dt;
+}
+
+void Particle::update(double dt, double g, double dragCoeff, double atmDensity) {
+    velocityX -= (dragCoeff * atmDensity * cross_sectional_Area * velocityX * std::abs(velocityX) / (2.0 * mass)) * dt;
+    
+    if (terminalVelocityY == 0.0) {
+        terminalVelocityY = std::sqrt((2.0 * mass * g) / (atmDensity * cross_sectional_Area * dragCoeff));
+    }
+    
+    double dragForceY = 0.5 * dragCoeff * atmDensity * cross_sectional_Area * velocityY * std::abs(velocityY);
+    double netAccelY = g - (dragForceY / mass);
+    velocityY += netAccelY * dt;
+    
     positionX += velocityX * dt;
     positionY += velocityY * dt;
 }
@@ -43,7 +64,7 @@ void Particle::clearForceY() {
 }
 
 double Particle::getKineticEnergy() const {
-    return 0.5 * mass * (pow(velocityX, 2) + pow(velocityY, 2));
+    return 0.5 * mass * (std::pow(velocityX, 2) + std::pow(velocityY, 2));
 }
 
 double Particle::getPositionX() const {
@@ -56,6 +77,14 @@ double Particle::getPositionY() const {
 
 double Particle::getVelocityX() const {
     return velocityX;
+}
+
+double Particle::getTerminalVelocityX() const {
+    return terminalVelocityX;
+}
+
+double Particle::getTerminalVelocityY() const {
+    return terminalVelocityY;
 }
 
 double Particle::getVelocityY() const {
@@ -76,4 +105,12 @@ void Particle::setVelocity(double velX, double velY) {
     }
     velocityX = velX;
     velocityY = velY;
+}
+
+void Particle::setTerminalVelocity(double velX, double dt, double g, double dragCoeff, double atmDensity) {
+    if (!isValid(velX)) {
+        throw std::invalid_argument("Invalid velocity");
+    }
+    terminalVelocityX = std::sqrt((2.0 * mass * std::abs(velX / dt)) / (atmDensity * cross_sectional_Area * dragCoeff));
+    terminalVelocityY = std::sqrt((2.0 * mass * g) / (atmDensity * cross_sectional_Area * dragCoeff));
 }

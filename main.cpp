@@ -7,17 +7,31 @@
 #include <stdexcept>
 
 int main() {
-    std::vector<World> currentSystem;
-    currentSystem.emplace_back(-9.81, 0.47);
+    std::cout << "Console Particle Physics Simulation\n"
+              << "-----------------------------------\n"
+              << "Enter the world parameters:\n"
+              << std::endl;
+    
+    std::cout << "Enter gravity (m/s^2): ";
+    double gravity;
+    std::cin >> gravity;
+    
+    std::cout << "Enter drag coefficient: ";
+    double dragCoefficient;
+    std::cin >> dragCoefficient;
+
+    World earth(gravity, dragCoefficient, 1.225);
     std::vector<Particle> particles;
 
     const double dt = 0.1;
-    const double g = currentSystem[0].getGravity();
-    const double m = currentSystem[0].getDragCoefficient();
+    const double g = earth.getGravity();
+    const double dc = earth.getDragCoefficient();
+    const double m = 1.0;
 
     std::cout << "Enter number of particles: ";
     int n;
     std::cin >> n;
+    
     for (int i = 0; i < n; i++) {
         try {
             particles.emplace_back(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, m, 1.0);
@@ -26,7 +40,6 @@ int main() {
             --i;
             continue;
         }
-        
     }
 
     double x = 0.0;
@@ -38,15 +51,13 @@ int main() {
     int defaultForce = 0;
 
     for (size_t i = 0; i < particles.size(); i++) {
-    
         Particle& p = particles[i];
-
-
 
         if (defaultPos == 1 && defaultForce == 1) {
             p.setPosition(x, y);
             p.applyForceX(fx);
             p.applyForceY(fy);
+            p.initialize(dt, g);
             continue;
         }
 
@@ -58,6 +69,8 @@ int main() {
             p.setPosition(x, y);
             std::cout << "Do you want to make it the default position? (1 for yes / 0 for no): ";
             std::cin >> defaultPos;
+        } else {
+            p.setPosition(x, y);
         }
 
         if (defaultForce == 0) {
@@ -69,25 +82,38 @@ int main() {
             p.applyForceY(fy);
             std::cout << "Do you want to make them the default forces? (1 for yes / 0 for no): ";
             std::cin >> defaultForce;
+        } else {
+            p.applyForceX(fx);
+            p.applyForceY(fy);
         }
-    }
 
-    for (int i = 0; i < 20; i++) {
-        std::cout << "t = " << i * dt << std::endl;
-        
+        p.initialize(dt, g);
+    }
+    
+    for (int step = 0; step < 20; step++) {
+        std::cout << "\n-----------------------------------\n";
+        std::cout << "Simulation state at t = " << step * dt << " seconds:\n";
+        std::cout << "t = " << step * dt << " seconds || "
+                  << "gravity = " << g << " m/s^2 || "
+                  << "drag coefficient = " << dc << " ||\n"
+                  << std::endl;
+
         for (size_t i = 0; i < particles.size(); i++) {
-        Particle& p = particles[i];
-            std::cout << "Particle " << (&p - &particles[0]) << ": " <<std::endl
+            Particle& p = particles[i];
+            std::cout << "Particle " << i << ": " << std::endl
                       << " position x = " << p.getPositionX() << " || "
                       << " position y = " << p.getPositionY() << " || "
                       << " velocity x = " << p.getVelocityX() << " || "
                       << " velocity y = " << p.getVelocityY() << " || "
                       << " kinetic energy = " << p.getKineticEnergy() << " || "
                       << std::endl;
-            p.update(dt, g);
+            p.update(dt, g, dc, earth.getAtmosphericDensity());
         }
-        
     }
-    std::cin >> n;
+    
+    std::cout << "\nPress Enter to exit...";
+    std::cin.ignore();
+    std::cin.get();
+    
     return 0;
 }

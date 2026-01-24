@@ -1,75 +1,52 @@
-🟦 Week 3 — Daily Checklist
-✅ Week 3 — Day 1
-From acceleration to forces
+Short-term (Immediate)
 
-☐ Remove acceleration from Particle
-☐ Add netForce to Particle
-☐ Add applyForce(double)
-☐ Add clearForces()
-☐ Compute acceleration inside update() using F = ma
-☐ Update main.cpp to apply gravity as a force
-☐ Verify motion matches previous gravity-only behavior
-☐ Commit / save stable version
+Add input validation - Check for negative gravity, invalid drag coefficients
+Configurable simulation - Let users set duration and timestep
+Better output formatting - Use fixed-width formatting for cleaner display
+CSV export - Save simulation data for plotting in external tools
+Preset scenarios - Offer common setups (projectile, freefall, etc.)
 
-✅ Week 3 — Day 2
-Multiple forces & force composition
+Medium-term (Next Phase)
 
-☐ Apply **more than one force per particle
-☐ Add linear drag force
-☐ Verify drag reduces velocity over time
-☐ Ensure forces reset each timestep
-☐ Confirm order of force application doesn’t matter
-☐ Add comments explaining each force
-☐ Print net force once for debugging
-☐ Save clean working version
+2D boundaries - Add ground collision detection
+Multiple particle types - Different masses, sizes, materials
+Additional forces - Wind, magnetic fields, springs
+Energy conservation tracking - Monitor total energy to validate physics
+Particle-particle interactions - Simple collision detection
 
-✅ Week 3 — Day 3
-Separating force logic from Particle
+Long-term (Future Vision)
 
-☐ Create ForceGenerator base class
-☐ Create GravityForce class
-☐ Create DragForce class
-☐ Move gravity logic out of main.cpp
-☐ Apply forces via generator objects
-☐ Ensure Particle has no physics constants
-☐ Test with gravity-only and drag-only cases
-☐ Clean up includes & headers
+3D simulation - Extend to three dimensions
+Real-time visualization - Use a graphics library (SDL2, SFML, or OpenGL)
+Configuration files - Load scenarios from JSON/XML
+Advanced physics - Rotation, angular momentum, deformation
+GUI interface - Interactive parameter adjustment
+Performance optimization - Spatial partitioning for many particles
 
-✅ Week 3 — Day 4
-World / Simulation control
+Recommended Roadmap
+Phase 1 (1-2 weeks): Polish core mechanics
 
-☐ Create World or Simulation class
-☐ Move particle update loop into World
-☐ Store particles inside World
-☐ Store force generators inside World
-☐ Implement step(dt) function
-☐ Replace physics logic in main.cpp
-☐ Confirm output matches earlier versions
-☐ Add simulation time tracking
+Fix remaining physics bugs
+Add proper terminal velocity handling
+Implement energy tracking
+Add CSV output
 
-✅ Week 3 — Day 5
-Stability, review, and polish
+Phase 2 (2-3 weeks): Enhanced features
 
-☐ Review class responsibilities
-☐ Ensure invariants still hold
-☐ Remove unused variables
-☐ Improve naming consistency
-☐ Add brief comments where intent isn’t obvious
-☐ Test edge cases (zero velocity, large dt)
-☐ Decide what moves to Week 4
-☐ Final commit / snapshot
+Ground/wall collisions
+Configurable simulation parameters
+Preset scenarios library
+Improved data output formatting
 
-🧠 End-of-week sanity check
+Phase 3 (1 month): Visualization
 
-You should be able to answer yes to all of these:
+Integrate SDL2 or SFML for graphics
+Real-time 2D rendering
+Interactive controls (pause, reset, speed adjustment)
 
-☐ Can I add a new force without modifying Particle?
-☐ Is physics logic outside main.cpp?
-☐ Do particles accumulate forces cleanly each step?
-☐ Is the code easier to extend than last week?
+Phase 4 (1-2 months): Advanced physics
 
-If yes → you’re on track.
-
-One sentence to remember
-
-Week 3 is about structure, not speed.
+Particle-particle collisions
+Variable forces (wind gusts, etc.)
+Multiple simultaneous forces
+Spring connections between particles

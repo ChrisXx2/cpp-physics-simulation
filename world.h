@@ -5,14 +5,14 @@ class World {
 private:
     double gravity;
     double dragCoefficient;
+    double atmosphericDensity;
 
 public:
-    World(double gravity, double dragCoefficient);
+    World(double gravity, double dragCoefficient, double atmosphericDensity);
 
     double getGravity() const;
     double getDragCoefficient() const;
-
-    void applyGlobalForces(double m, double fX, double fY) const;
+    double getAtmosphericDensity() const;
 };
 
 #endif
